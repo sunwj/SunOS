@@ -37,8 +37,10 @@
 #define REG_SCREEN_DATA 0x3D5
 
 #include "types.h"
+#include "port_io.h"
 
 void WriteChar(char c, int row, int col, uint8 color);
 uint32 GetConsoleOffset(int row, int col);
+uint32 GetCursor();
 
 #endif

@@ -28,3 +28,22 @@ uint32 GetConsoleOffset(int row, int col)
 {
 	return (row * CONSOLE_WIDTH + col) * 2;
 }
+
+uint32 GetCursor()
+{
+	// the device uses its control register as an index
+	// to select its internal registers, of which we are
+	// interested in
+	// reg 14: which is the high byte of the cursor's offset
+	// reg 15: which is the low byte of the cursor's offset
+	// Once the internal register has been selected, we may read or
+	// write a byte on the data register
+	WritePort_Byte(REG_SCREEN_CTRL, 14);
+	uint32 offset = ReadPort_byte(REG_SCREEN_DATA) << 8;
+	WritePort_Byte(REG_SCREEN_CTRL, 15);
+	offset += ReadPort_byte(REG_SCREEN_DATA);
+	// Since the cursor offset reported by the VGA hardware is the
+	// number of characters, we multiply by two to convert it to 
+	// a character cell offset
+	return offset * 2;
+}

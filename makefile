@@ -9,3 +9,4 @@ os-img:./build/bootloader.bin ./build/kernel.bin
 
 clean:
 	rm os-img
+	rm ./build/*.*
