@@ -39,8 +39,9 @@
 #include "types.h"
 #include "port_io.h"
 
-void WriteChar(char c, int row, int col, uint8 color);
-uint32 GetConsoleOffset(int row, int col);
-uint32 GetCursor();
+extern void WriteChar(char c, int row, int col, uint8 color);
+extern uint32 GetConsoleOffset(int row, int col);
+extern uint32 GetCursor();
+extern void SetCursor(uint16 offset);
 
 #endif

@@ -1,12 +1,15 @@
-os-img:./build/bootloader.bin ./build/kernel.bin
-	cat $^ > $@
+all:depend
+	cat ./build/bootloader.bin ./build/kernel.bin > os-img
 
-./build/bootloader.bin:
-	make -C ./boot/makefile
-
-./build/kernel.bin:
-	make -C ./kernel/makefile
+depend:
+	make -C ./boot/
+	make -C ./driver/
+	make -C ./kernel/
 
 clean:
 	rm os-img
 	rm ./build/*.*
+
+dep_clean:
+	rm ./driver/*.o
+	rm ./kernel/*.o

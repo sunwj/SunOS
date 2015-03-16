@@ -3,5 +3,6 @@
 
 void main()
 {
+    SetCursor(0);
 	WriteChar('X', -1, -1, 0);
 }

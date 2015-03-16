@@ -1,5 +1,5 @@
-NASM=nasm
+ASM=nasm
 
 bootloader.bin:bootloader.asm
-	$(NASM) -f bin $< -o $@
+	$(ASM) -f bin $< -o $@
 	mv *.bin ../build
