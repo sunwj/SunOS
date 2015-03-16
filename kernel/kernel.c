@@ -3,6 +3,9 @@
 
 void main()
 {
+	uint32 i = 0;
+    ClearConsole(0);
     SetCursor(0);
-	WriteChar('X', -1, -1, 0);
+	
+	WriteString("SunOS, a simple operating system!", 12, 20, GREEN_ON_BLACK);
 }

@@ -43,5 +43,8 @@ extern void WriteChar(char c, int row, int col, uint8 color);
 extern uint32 GetConsoleOffset(int row, int col);
 extern uint32 GetCursor();
 extern void SetCursor(uint16 offset);
+extern void ClearConsole(uint8 color);
+uint32 HandleScroll(uint16 offset);
+extern void WriteString(string s, int row, int col, uint8 color);
 
 #endif

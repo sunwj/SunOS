@@ -31,14 +31,15 @@ load_kernel:
 	mov dh, 0x00			; head
 	int 0x13
 	or ah, ah
-	jnz load_kernel
+	jnz .diskerror
 	
 	ret
 	
 .diskerror:
 	mov bx, MSG_DISK_ERROR
 	call print_string
-	jmp $
+	cli
+    hlt
 
 	%include './aux/printstring.asm'
 	%include './aux/gdt.asm'
