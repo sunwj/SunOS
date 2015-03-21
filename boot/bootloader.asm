@@ -1,6 +1,6 @@
 ; A boot sector that enters 32 - bit protected mode
 [org 0x7c00]
-KERNEL_OFFSET equ 0x1000
+KERNEL_OFFSET equ 0x2000
 
 	mov [BOOT_DRIVER], dl
 
@@ -11,7 +11,8 @@ KERNEL_OFFSET equ 0x1000
 	call print_string
 	
 	call load_kernel					; load our kernel
-
+	lidt [idt]							; load idt
+	
 	call switch_to_pm					; we never return from here
 
 	jmp $
@@ -23,9 +24,9 @@ load_kernel:
 	mov bx, MSG_LOAD_KERNEL
 	call print_string
 	
-	mov bx, KERNEL_OFFSET
+	mov bx, 0x1000
 	mov ah, 0x02			; floppy read sector command
-	mov al, 0x0f			; number of sectors to read
+	mov al, 0x1f			; number of sectors to read
 	mov ch, 0x00			; cylinder
 	mov cl, 0x02			; base sector
 	mov dh, 0x00			; head
@@ -62,3 +63,5 @@ MSG_DISK_ERROR db 'Disk read error', 0
 
 	times 510 - ($ - $$) db 0
 	dw 0xaa55
+	
+	%include './aux/idt.asm'

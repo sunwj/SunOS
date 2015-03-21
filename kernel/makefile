@@ -9,7 +9,7 @@ all:kernel.bin
 	mv kernel.bin ../build/
 
 kernel.bin:$(OBJS)
-	$(LD) -o $@ -Ttext 0x1000 $^ --oformat binary
+	$(LD) -o $@ -Ttext 0x2000 $^ --oformat binary
 
 kernel_entry.o:kernel_entry.asm
 	$(ASM) -f elf $< -o $@
